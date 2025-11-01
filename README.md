@@ -19,12 +19,6 @@ A comprehensive Tkinter GUI desktop application that tests your typing speed wit
 python typing_speed_test.py
 ```
 
-Or use the launcher:
-
-```bash
-python run_typing_test.py
-```
-
 ## How to Use
 
 1. **Start**: Click "Start Test" to begin timing

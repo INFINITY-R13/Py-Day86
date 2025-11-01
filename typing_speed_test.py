@@ -206,9 +206,9 @@ class TypingSpeedTest:
         self.input_text.config(state="disabled")
         
         # Reset stats
-        self.wpm_label.config(text="WPM: 0")
-        self.accuracy_label.config(text="Accuracy: 100%")
-        self.time_label.config(text="Time: 0s")
+        self.wpm_label.config(text="WPM: 0", fg="#333")
+        self.accuracy_label.config(text="Accuracy: 100%", fg="#333")
+        self.time_label.config(text="Time: 0s", fg="#333")
         
         # Reset button states
         self.start_button.config(state="normal")
@@ -305,15 +305,37 @@ class TypingSpeedTest:
         wpm = (words_typed / elapsed_time) * 60 if elapsed_time > 0 else 0
         accuracy = (self.correct_characters / self.typed_characters) * 100 if self.typed_characters > 0 else 100
         
-        # Show completion message
+        # Update final stats display
+        self.wpm_label.config(text=f"Final WPM: {wpm:.1f}", fg="#4CAF50")
+        self.accuracy_label.config(text=f"Final Accuracy: {accuracy:.1f}%", fg="#4CAF50")
+        self.time_label.config(text=f"Total Time: {elapsed_time:.1f}s", fg="#4CAF50")
+        
+        # Determine performance level
+        if wpm >= 60:
+            performance = "Excellent! 🚀"
+        elif wpm >= 40:
+            performance = "Good! 👍"
+        elif wpm >= 25:
+            performance = "Average 📝"
+        else:
+            performance = "Keep practicing! 💪"
+        
+        # Show detailed completion message
         messagebox.showinfo(
-            "Test Complete!",
+            "🎉 Test Complete!",
             f"Congratulations! You completed the test!\n\n"
-            f"Final Results:\n"
-            f"WPM: {wpm:.1f}\n"
-            f"Accuracy: {accuracy:.1f}%\n"
-            f"Time: {elapsed_time:.1f} seconds\n"
-            f"Characters typed: {self.typed_characters}"
+            f"📊 FINAL RESULTS:\n"
+            f"⚡ Typing Speed: {wpm:.1f} WPM\n"
+            f"🎯 Accuracy: {accuracy:.1f}%\n"
+            f"⏱️ Time Taken: {elapsed_time:.1f} seconds\n"
+            f"📝 Characters Typed: {self.typed_characters}\n"
+            f"✅ Correct Characters: {self.correct_characters}\n\n"
+            f"Performance: {performance}\n\n"
+            f"Average typing speed:\n"
+            f"• Beginner: 15-25 WPM\n"
+            f"• Average: 25-40 WPM\n"
+            f"• Good: 40-60 WPM\n"
+            f"• Excellent: 60+ WPM"
         )
         
         # Disable input
